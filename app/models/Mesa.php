@@ -9,13 +9,11 @@
     {
         use SoftDeletes;
     
-        //Establezco la 'configuracion' de la tabla perteneciente a esta clase.
         protected $primaryKey = 'IdMesa';
         protected $table = 'mesas';
         public $incremeting = true;
         public $timestamps = true;
     
-        //Redefino el nombre de mis columnas "CREATED_AT, DELETED_AT, UPDATED_AT".
         const CREATED_AT = 'fechaAlta';
         const DELETED_AT = 'fechaBaja';
         const UPDATED_AT = 'fechaModificacion';

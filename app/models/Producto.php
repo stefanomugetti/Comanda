@@ -1,29 +1,27 @@
 <?php
 
-class Producto
+namespace app\models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Producto extends Model
 {
-    public $nombre;
-    public $precio;
-    public $tipo;
-    public $stock;
-    public $id;
+    use SoftDeletes;
 
-    public function crearProducto()
-    {
-        //Obtengo la instancia del 'accesoDatos' de mi SQL.
-        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+    protected $primaryKey = 'IdProducto';
+    protected $table = 'productos';
+    public $incremeting = true;
+    public $timestamps = true;
 
-        //Prepraro y me guardo la consulta INSERT del nuevo Producto que se pretende dar de alta.
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre, precio, tipo, stock) VALUES (:nombre, :precio, :tipo, :stock)");
+    const CREATED_AT = 'FechaAlta';
+    const DELETED_AT = 'FechaBaja';
+    const UPDATED_AT = 'FechaModificacion';
 
-        //Bindeo los values
-        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
-        $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
-        $consulta->bindValue(':stock', $this->stock);
-        
-        $consulta->execute();
-
-        return $objAccesoDatos->obtenerUltimoId();
-    }
+    public $fillable = [
+        'Nombre','PrecioUnidad','TiempoEspera',
+        'Area','TipoProducto','Stock','FechaAlta',
+        'FechaBaja','FechaModificacion'
+    ];
 }
+?>

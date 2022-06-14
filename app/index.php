@@ -50,14 +50,19 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();;
 
-// ------------------------ USUARIOS  ------------------
-// $app->group('/usuarios', function (RouteCollectorProxy $group) 
-// {
-//     $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-//     $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
-//     $group->post('[/]', \UsuarioController::class . ':CargarUno');
-// });
+// ------------------------// U S U A R I O S // ------------------------
+$app->group('/usuarios', function (RouteCollectorProxy $group) 
+{
+    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
 
+    $group->get('/{IdUsuario}', \UsuarioController::class . ':TraerUno');
+    
+    $group->post('[/]', \UsuarioController::class . ':CargarUno');
+
+    $group->put('/{IdUsuario}', \UsuarioController::class. ':ModificarUno');
+
+    $group->delete('/{IdUsuario}', \UsuarioController::class . ':BorrarUno');
+});
 // ------------------------// MESAS// ------------------------------
 $app->group('/mesas', function (RouteCollectorProxy $group) 
 {
@@ -76,7 +81,14 @@ $app->group('/mesas', function (RouteCollectorProxy $group)
 $app->group('/productos', function (RouteCollectorProxy $group) 
 {
     $group->get('[/]', \ProductoController::class . ':TraerTodos');
+
+    $group->get('/{IdProducto}', \ProductoController::class . ':TraerUno');
+
     $group->post('[/]', \ProductoController::class . ':CargarUno');
+
+    $group->put('/{IdProducto}', \ProductoController::class. ':ModificarUno');
+
+    $group->delete('/{IdProducto}', \ProductoController::class . ':BorrarUno');
 });
 
 // ------------------------// P E D I D O S // ------------------
